@@ -1,0 +1,26 @@
+services:
+  dns-resolver:
+    image: mvance/unbound:latest
+    ports:
+      - name: dns-udp
+        protocol: udp
+        target: 53
+        published: 53
+        app_protocol: dns
+      - name: dns-tcp
+        protocol: tcp
+        target: 53
+        published: 53
+        app_protocol: dns
+    restart: on-failure:3
+    networks:
+      - local-resolver
+    volumes:
+      - ./source/conf/a-records.conf:/opt/unbound/etc/unbound/a-records.conf
+volumes:
+  unbound-conf:
+    name: unbound-conf
+networks:
+  local-resolver:
+    driver: bridge
+    name: local-resolver
