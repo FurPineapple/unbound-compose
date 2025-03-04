@@ -10,7 +10,7 @@ services:
       - name: dns-tcp
         protocol: tcp
         target: 53
-        published: 15353
+        published: 53
         app_protocol: dns
     restart: on-failure:3
     networks:
