@@ -12,7 +12,7 @@ services:
         target: 53
         published: 53
         app_protocol: dns
-    restart: on-failure:3
+    restart: unless-stopped
     networks:
       - local-resolver
     volumes:
